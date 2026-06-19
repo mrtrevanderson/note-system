@@ -33,7 +33,7 @@ below; Slack last.
 The fellow-dump routine already wrote yesterday's meetings to `fellow/DATE/` and
 committed them to the branch you cloned. Do not call the Fellow connector.
 
-- List files under `fellow/DATE/`. Each is one meeting in the fellow-dump schema:
+- List files under `fellow/YEAR/DATE/` (where YEAR is the four-digit year of DATE). Each is one meeting in the fellow-dump schema:
   frontmatter (`title`, `time`, `participants`, `fellow_url`) plus `## AI Summary`
   (or `## AI Notes`) and `## Transcript` sections.
 - Parse each file fully. Extract:
@@ -55,9 +55,9 @@ committed them to the branch you cloned. Do not call the Fellow connector.
   all chapter bullet points (with [HH:MM:SS] timestamps), then Decisions and
   Actions subsections. If no AI summary exists, use the transcript to produce a
   detailed set of discussion bullets covering every topic raised.
-- Record the file path (e.g. `fellow/DATE/de-1-1-kapil.md`) as the meeting's
-  `notes:` value in the meetings index line.
-- If `fellow/DATE/` is missing or empty: add `fellow: no transcripts in repo
+- Record the file path (e.g. `fellow/2026/2026-06-17/de-1-1-kapil.md`) as the
+  meeting's `notes:` value in the meetings index line.
+- If `fellow/YEAR/DATE/` is missing or empty: add `fellow: no transcripts in repo
   for DATE` to `capture_notes` and continue. Not a hard failure. Keep
   `fellow_source: repo` in the frontmatter.
 

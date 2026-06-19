@@ -1,0 +1,31 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git config *)",
+      "Bash(git clone *)",
+      "Bash(git -C /Users/trevoranderson/Documents/Claude-Code/note-system init)",
+      "Bash(git -C /Users/trevoranderson/Documents/Claude-Code/note-system remote add origin https://github.com/mrtrevanderson/note-system.git)",
+      "Bash(git -C /Users/trevoranderson/Documents/Claude-Code/note-system fetch origin)",
+      "Bash(git -C /Users/trevoranderson/Documents/Claude-Code/note-system checkout main)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)",
+      "Bash(git remote *)",
+      "Read(//Users/trevoranderson/.ssh/**)",
+      "Bash(ssh-keyscan github.com)",
+      "Bash(ssh -T git@github.com)",
+      "Bash(git -C ~/Documents/Claude-Code/note-system remote set-url origin git@github.com:mrtrevanderson/note-system.git)",
+      "Bash(git -C ~/Documents/Claude-Code/note-system push)",
+      "Bash(git -C ~/Documents/Claude-Code/note-system fetch origin)",
+      "Bash(git -C ~/Documents/Claude-Code/note-system branch -a)",
+      "Bash(curl -s https://api.github.com/repos/mrtrevanderson/note-system/pulls)",
+      "Bash(python3 -c \"import sys,json; prs=json.load\\(sys.stdin\\); [print\\(f'PR #{p[\\\\\"number\\\\\"]}: {p[\\\\\"title\\\\\"]} | branch: {p[\\\\\"head\\\\\"][\\\\\"ref\\\\\"]} | state: {p[\\\\\"state\\\\\"]}'\\) for p in prs]\")",
+      "Bash(curl -s \"https://api.github.com/repos/mrtrevanderson/note-system/pulls?state=open\")",
+      "Bash(python3 -m json.tool)",
+      "Bash(git -C ~/Documents/Claude-Code/note-system add daily-log-schema.md SKILL.md)",
+      "Bash(git -C ~/Documents/Claude-Code/note-system commit -m ' *)",
+      "Bash(git -C ~/Documents/Claude-Code/note-system add daily-note-prompt.md)",
+      "Bash(git -C ~/Documents/Claude-Code/note-system add -A)"
+    ]
+  }
+}
