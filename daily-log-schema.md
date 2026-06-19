@@ -49,10 +49,40 @@ One flat factual orientation line. Not a significance summary.
 
 ### `## meetings`
 The Outlook calendar event is the canonical object; Fellow (from the repo) and
-Zoom (from the connector) attach to it.
+Zoom (from the connector) attach to it. One index line per meeting.
 `- HH:MM-HH:MM | <title> | attendees: <name; name> | notes: <fellow_path|zoom_url|none> | outcome: <one factual clause or none> | actions: <action ids or none>`
 
 For Fellow, `notes:` is the repo path, e.g. `fellow/2026-06-17/de-1-1-kapil.md`.
+
+### `## meeting_notes`
+Full per-meeting detail for every meeting that has a Fellow file or Zoom AI
+summary. One block per meeting, ordered by start time. Meetings with no source
+content get a block stating that explicitly — never omit the block entirely.
+
+```
+### <meeting title>
+> <HH:MM-HH:MM> | source: <fellow_path|zoom_url|none>
+
+<AI summary: full text, verbatim from Fellow AI Summary / Zoom AI summary.
+ If multiple paragraphs, keep them all.>
+
+**Discussion:**
+- [HH:MM:SS] <point — one bullet per chapter item or significant transcript moment. Preserve timestamps. Keep full detail; do not compress.>
+
+**Decisions:**
+- <decision text, verbatim>
+
+**Actions:** <AI-NNN (owner: name); ...| none>
+```
+
+Rules:
+- Copy the AI summary verbatim; do not paraphrase or shorten.
+- For each chapter in the Fellow AI summary, emit all bullet points with their
+  timestamps. If there are no chapters, extract key moments from the transcript.
+- If the meeting has no AI summary and no transcript, write
+  `_(no Fellow AI summary or transcript available)_` in place of the summary.
+- Decisions and actions listed here must match those in `## decisions` and
+  `## action_items` exactly.
 
 ### `## action_items`
 `- [ ] id:<AI-NNN> | owner:<name> | due:<YYYY-MM-DD|none> | source:<meeting title|jira DE-XXXX|slack|email> | <verbatim-as-possible text>`
@@ -71,11 +101,24 @@ One line per discrete Jira action.
 Substantive Slack/email only (decision, ask, commitment, status change).
 `- <slack|email> | <channel/thread or subject> | with:<name; name> | <the point, factual> | <url|none>`
 
+## Section order (fixed)
+
+1. `## tl;dr`
+2. `## meetings`
+3. `## meeting_notes`
+4. `## action_items`
+5. `## decisions`
+6. `## ticket_activity`
+7. `## doc_activity`
+8. `## comms_highlights`
+
 ## Empty-section convention
 
 ```
 ## decisions
 _(none)_
 ```
+
+`## meeting_notes` uses `_(none)_` only when there were literally zero meetings.
 
 See `daily/_TEMPLATE.md` for a complete example.

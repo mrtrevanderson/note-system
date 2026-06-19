@@ -34,17 +34,32 @@ The fellow-dump routine already wrote yesterday's meetings to `fellow/DATE/` and
 committed them to the branch you cloned. Do not call the Fellow connector.
 
 - List files under `fellow/DATE/`. Each is one meeting in the fellow-dump schema:
-  frontmatter (`title`, `time`, `participants`, `fellow_url`) plus `## AI Notes`
-  and `## Transcript` sections.
-- Parse each file's frontmatter and AI Notes. The AI Notes carry the outcome and
-  action items for the meeting; the transcript is available if you need to
-  resolve detail, but the daily log generally uses the notes.
-- These attach to the calendar spine in the merge step. Record the file path
-  (e.g. `fellow/DATE/de-1-1-kapil.md`) as the meeting's `notes:` value.
-- If `fellow/DATE/` is missing or empty: fellow-dump may not have run, or there
-  were no Fellow meetings. Add `fellow: no transcripts in repo for DATE` to
-  `capture_notes` and continue. This is not a hard failure; calendar and Zoom
-  still cover meetings. Keep `fellow_source: repo` in the frontmatter.
+  frontmatter (`title`, `time`, `participants`, `fellow_url`) plus `## AI Summary`
+  (or `## AI Notes`) and `## Transcript` sections.
+- Parse each file fully. Extract:
+  - **Frontmatter**: title, time, participants, fellow_url — used for the
+    meetings index line and meeting_notes block header.
+  - **AI Summary**: the full AI-generated summary text, including all chapter
+    headings and their bullet points with timestamps. Copy verbatim; do not
+    paraphrase or shorten. This is the primary source for `meeting_notes`.
+  - **AI-Generated Action Items** and **Decisions** subsections within the AI
+    Summary: extract these for `action_items` and `decisions` sections.
+  - **Transcript**: read the transcript when the AI Summary is missing or sparse.
+    Extract key moments, decisions, and commitments as timestamped bullets for
+    `meeting_notes`. You do not need to reproduce the full transcript, but do
+    capture all substantive content — topics discussed, conclusions reached,
+    open questions, and anything that would inform a downstream weekly summary.
+- For the **meetings index line**: derive the one-clause `outcome` from the
+  AI Summary's Decisions or the top-level summary paragraph.
+- For the **meeting_notes block**: write the full AI summary verbatim, then
+  all chapter bullet points (with [HH:MM:SS] timestamps), then Decisions and
+  Actions subsections. If no AI summary exists, use the transcript to produce a
+  detailed set of discussion bullets covering every topic raised.
+- Record the file path (e.g. `fellow/DATE/de-1-1-kapil.md`) as the meeting's
+  `notes:` value in the meetings index line.
+- If `fellow/DATE/` is missing or empty: add `fellow: no transcripts in repo
+  for DATE` to `capture_notes` and continue. Not a hard failure. Keep
+  `fellow_source: repo` in the frontmatter.
 
 ### Zoom (connector)
 
@@ -113,8 +128,17 @@ Fill per-line `entities:` fields and build the frontmatter `entities` union
 
 ## Step 5: render, write, commit
 
-1. Render strictly per `schema/daily-log-schema.md`: fixed section order, one
-   item per line, the pipe grammars, `_(none)_` for empty sections.
+1. Render strictly per `schema/daily-log-schema.md` in the fixed section order:
+   `tl;dr` → `meetings` → `meeting_notes` → `action_items` → `decisions` →
+   `ticket_activity` → `doc_activity` → `comms_highlights`.
+   - `meetings`: one pipe-grammar line per meeting (index only).
+   - `meeting_notes`: one block per meeting, ordered by start time. Each block
+     has the `### Title`, `> time | source:` header, full AI summary verbatim,
+     `**Discussion:**` bullets with timestamps, `**Decisions:**` list, and
+     `**Actions:**` line. If a meeting has no Fellow file and no Zoom AI
+     summary, write `_(no source content available)_`. Never skip a meeting
+     that appears in the meetings index.
+   - All other sections: one item per line, pipe grammar, `_(none)_` if empty.
 2. Fill frontmatter: `fellow_source: repo`, counts, the three source-status
    lists, entities, capture_notes.
 3. Write `daily/DATE.md`. Commit directly to `branch.name` and push. No PR, no
