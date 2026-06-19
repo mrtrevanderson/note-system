@@ -99,7 +99,15 @@ file (from the repo) and the Zoom assets to the event they belong to.
   AND type in (page, blogpost)
   ```
   Parallel query with `creator = currentUser()` to flag created vs edited.
-- Capture title, page id, space, created|edited, url. Do not pull page bodies.
+- For each page found, call `getConfluencePage` to retrieve the page body.
+  Extract a detail description covering: what the page is about, what major
+  sections or content it contains, and — where discernible from the structure
+  or content — what was likely added or updated in this session (e.g. new
+  sections, tables filled in, decisions appended, draft status changed). For
+  created pages, summarize the full scope of what was written. For edited pages,
+  describe what the page covers and note any sections that appear newly added
+  or substantially changed. Keep the detail to 1–3 factual clauses; do not
+  quote large blocks of page text.
 
 ### Slack (last, most fragile)
 

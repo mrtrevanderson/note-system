@@ -95,7 +95,10 @@ One line per discrete Jira action.
 `- <DE-XXXX> | <created|transitioned|commented|worklog> | <detail> | <url>`
 
 ### `## doc_activity`
-`- <title> (<page_id>) | space:<KEY> | <created|edited> | <url>`
+One line per page. The detail field describes what the page covers and, where
+discernible from the content, what was added or changed in this session.
+
+`- <title> (<page_id>) | space:<KEY> | <created|edited> | <detail: what the page covers and what was worked on — section names, key content, decisions documented, tables updated, etc.> | <url>`
 
 ### `## comms_highlights`
 Substantive Slack/email. Cast wide: DM threads with any work content, channel
