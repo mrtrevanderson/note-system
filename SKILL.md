@@ -103,20 +103,42 @@ file (from the repo) and the Zoom assets to the event they belong to.
 
 ### Slack (last, most fragile)
 
-- Always: DMs in the window and messages mentioning the identity
-  (`slack_search_public_and_private`).
-- Allowlisted channels (`slack.channel_allowlist`): `slack_read_channel` over the
-  window for the identity's substantive messages and threads participated in;
-  `slack_read_thread` for parent context. Never read `slack.channel_blocklist`.
-- Apply the comms filter hard. On rate limit, keep what you have, note
-  `slack: rate limited, partial capture`, and only mark failed if you got nothing.
+- **DMs**: search for all DM conversations active in the window using
+  `slack_search_public_and_private` with `from:<@USERID>` and also search for
+  messages sent TO the identity. For every DM thread that had activity, call
+  `slack_read_thread` to get the full thread context — do not capture just the
+  search-result snippet. A DM thread counts as one `comms_highlights` entry; the
+  detail field should summarize the full exchange (what was asked, what was
+  answered, what was decided or unresolved), not just the triggering message.
+- **Mentions**: `slack_search_public_and_private` for messages mentioning the
+  identity in any channel. Read the thread for each hit.
+- **Allowlisted channels** (`slack.channel_allowlist`): `slack_read_channel` over
+  the window; capture every message the identity sent and every thread they
+  participated in; `slack_read_thread` for full thread context.
+- Never read `slack.channel_blocklist`.
+- On rate limit, keep what you have, note `slack: rate limited, partial capture`,
+  and only mark failed if you got nothing.
 
 ## Step 3: the comms filter (Slack + email)
 
-Keep an item only if it is a decision/direction, an ask, a commitment, or a
-status change on real work. Drop greetings, acknowledgements, logistics, chatter,
-and automated mail. When a kept item also carries an action or decision, also
-lift it into the proper section. Err slightly toward keeping; this is bronze.
+**Slack DMs**: Keep every DM thread where real work was discussed — questions,
+status updates, blockers, technical details, decisions, follow-ups. Do not drop
+a thread just because it also contains small talk; capture the work content.
+Only drop threads that are entirely social with zero work content.
+
+**Slack channels / mentions**: Keep messages where the identity sent or received
+a substantive message — a question, an answer, a direction, a status update, a
+blocker, a technical clarification. Drop pure acknowledgements ("👍", "thanks",
+"got it") when they stand alone with no content.
+
+**Email**: Keep emails that contain a decision, direction, ask, commitment, or
+status change on real work. Drop automated notifications, calendar confirmations,
+and pure logistics. When a PR review email has substantive feedback content,
+keep it.
+
+For any kept item that also carries an action or decision, lift it into
+`action_items` / `decisions` as well. Err strongly toward keeping; this is
+bronze and the downstream agents need the raw material.
 
 ## Step 4: normalize and tag entities
 

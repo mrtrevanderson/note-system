@@ -98,8 +98,13 @@ One line per discrete Jira action.
 `- <title> (<page_id>) | space:<KEY> | <created|edited> | <url>`
 
 ### `## comms_highlights`
-Substantive Slack/email only (decision, ask, commitment, status change).
-`- <slack|email> | <channel/thread or subject> | with:<name; name> | <the point, factual> | <url|none>`
+Substantive Slack/email. Cast wide: DM threads with any work content, channel
+messages where the identity participated substantively, emails with decisions or
+asks. One line per thread/email. The detail field should capture the full
+substance of the exchange — what was asked, what was answered, what was decided
+or left open — not just the headline.
+
+`- <slack-dm|slack-channel|slack-mention|email> | <channel/DM partner/subject> | with:<name; name> | <full substance: question asked, answer given, decision made, blocker raised, next step agreed — be specific and complete> | <url|none>`
 
 ## Section order (fixed)
 
