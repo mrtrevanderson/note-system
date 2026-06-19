@@ -11,8 +11,8 @@ to perform the entire task below, then report the subagent's manifest back.
 
 Subagent task:
 
-1. Read CLAUDE.md, config.yaml, and schema/daily-log-schema.md from the repo root.
-2. Run the daily-collector skill (.claude/skills/daily-collector/SKILL.md).
+1. Read CLAUDE.md, config.yaml, daily-log-schema.md, and SKILL.md from the repo root.
+2. Follow the instructions in SKILL.md (the daily-collector skill) exactly.
 3. Capture yesterday (day_boundary.mode = previous) across every enabled source.
    Fellow comes from the repo at fellow/<DATE>/ (already committed by the
    fellow-dump routine); do NOT call the Fellow connector. The other sources
