@@ -1,0 +1,90 @@
+# note-system configuration
+# One repo, two routines. Both read this file at the start of every run.
+#   - fellow-dump   (runs first) writes raw Fellow transcripts to fellow/{date}/
+#   - daily-note    (runs later)  reads fellow/{date}/ and the live connectors,
+#                                 then writes the daily log to daily/{date}.md
+# Editing this file never requires touching collection logic.
+
+identity:
+  display_name: "Trevor Anderson"
+  timezone: "America/Los_Angeles"
+
+day_boundary:
+  # Both routines capture YESTERDAY. Run them in the morning so the day is closed.
+  mode: "previous"
+
+branch:
+  # CRITICAL: both routines commit to the SAME branch, and it MUST be the repo's
+  # default branch. The daily-note routine clones the default branch and reads
+  # fellow/{date}/ from it, so if fellow-dump committed transcripts to a different
+  # branch, daily-note would clone main and see nothing. Keep both on main.
+  # Do NOT add branch-protection rules to main on this repo, or the routine pushes
+  # will be rejected at the GitHub layer.
+  name: "main"
+
+schedule:
+  # Routines have no dependency triggers, so order them by time. Give fellow-dump
+  # comfortable headroom to finish and push before daily-note clones.
+  fellow_dump_local: "05:00"
+  daily_note_local:  "06:00"
+
+# ---- fellow-dump routine ----
+fellow_dump:
+  output_dir: "fellow/{date}/"            # one markdown file per meeting
+  # Format is defined in schema/fellow-dump-schema.md (the contract daily-note reads).
+
+# ---- daily-note routine ----
+output:
+  path: "daily/{date}.md"
+  commit_message: "daily log: {date}"
+
+sources:
+  # Outlook calendar is the spine. Fellow is read from the repo (NOT the connector),
+  # because fellow-dump already captured it. The rest are live connectors.
+  outlook:    { enabled: true,  via: connector }
+  fellow:     { enabled: true,  via: repo, input_dir: "fellow/{date}/" }
+  zoom:       { enabled: true,  via: connector }
+  jira:       { enabled: true,  via: connector }
+  confluence: { enabled: true,  via: connector }
+  slack:      { enabled: true,  via: connector }   # noisiest; captured last
+
+jira:
+  project_keys: ["DE"]
+
+confluence:
+  space_keys: ["DOT"]
+
+slack:
+  channel_allowlist:
+    - "#data-engineering"   # replace with your real team channels
+    - "#fluent-ai"
+  channel_blocklist:
+    - "#claude-notes"       # output channel, not an input
+
+roster:
+  - "Dan Duling"
+  - "Kapil Sreedharan"
+  - "Akhil Gonna"
+  - "Joseph Melkin"
+  - "Vani Kaithi"
+  - "Venkatesh Mannam"
+  - "Manav Paul"
+  - "Jean Carlo Camacho"
+  - "Dave Van Herten"
+  - "Rami Labana"
+  - "Andrew Chalk"
+  - "Jack Hall"
+  - "Arbi Anjargholi"
+
+entities:
+  patterns:
+    ticket: '\bDE-\d+\b'
+    confluence_page_id: '\b\d{9,}\b'
+  keywords:
+    - "centraldata_prod"
+    - "adflow"
+    - "Unity Catalog"
+    - "Lakebase"
+    - "Aurora"
+    - "identity graph"
+    - "Q3 Planning"
