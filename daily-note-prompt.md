@@ -14,7 +14,7 @@ Subagent task:
 1. Read CLAUDE.md, config.yaml, daily-log-schema.md, and SKILL.md from the repo root.
 2. Follow the instructions in SKILL.md (the daily-collector skill) exactly.
 3. Capture yesterday (day_boundary.mode = previous) across every enabled source.
-   Fellow comes from the repo at fellow/<DATE>/ (already committed by the
+   Fellow comes from the repo at fellow/<YEAR>/<DATE>/ (already committed by the
    fellow-dump routine); do NOT call the Fellow connector. The other sources
    (Outlook, Zoom, Jira, Confluence, Slack) come from their live connectors.
 4. Normalize into the daily-log schema, tag entities, and write daily/<DATE>.md.
