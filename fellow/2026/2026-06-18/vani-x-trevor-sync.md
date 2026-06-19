@@ -7,16 +7,17 @@ meeting_id: "040000008200E00074C5B7101A82E00807EA0613D9C0D4CC7CDDDC0100000000000
 note_id: 80307556
 recording_id: 14673956
 fellow_url: "https://fluentco.fellow.app/meetings/040000008200E00074C5B7101A82E00807EA0613D9C0D4CC7CDDDC010000000000000000100000003BD349D27723DD4E820A26EF210B5652/"
+meeting_link: "https://fellow.link/S35Z99JBTBQA"
 ---
 
 # Vani x Trevor Sync
 
 ## Participants
 
-| Name | Email | Role | RSVP |
-|------|-------|------|------|
-| Trevor Anderson | tanderson@fluentco.com | organizer | accepted |
-| Vani Kaithi | vkaithi@fluentco.com | attendee | notResponded |
+| Name | Email | Organizer | RSVP |
+|------|-------|-----------|------|
+| Trevor Anderson | tanderson@fluentco.com | yes | accepted |
+| Vani Kaithi | vkaithi@fluentco.com | no | notResponded |
 
 ## Fellow Notes
 
@@ -61,20 +62,20 @@ Trevor announced that the team must begin submitting **weekly Lattice updates** 
 
 - [00:18:50] Vani added new survey fields from Lead Manager to the gold email details table for the advertiser report, specifically the **depth and gaming fields** which weren't previously in the gold table.
 - [00:20:01] The BI team is building a separate advertiser report dashboard using these survey fields for grouping, similar to existing Link dashboard functionality but with enhanced survey field display capabilities.
-- [00:22:22] The dashboard displays **cumulative ROAS metrics over 90 days** post-install, showing revenue growth at day 1, day 3, etc., with typical plateau occurring around 20-30 days based on the example data reviewed.
+- [00:22:25] The dashboard displays **cumulative ROAS metrics over 90 days** post-install, showing revenue growth at day 1, day 3, etc., with typical plateau occurring around 20-30 days based on the example data reviewed.
 
 #### Other Sprint Work
 
-- [00:24:44] The business unit mapping table classification work was completed and **released in sprint 28**.
+- [00:24:46] The business unit mapping table classification work was completed and **released in sprint 28**.
 - [00:25:04] The Tune catalog migration ticket is closed but not done, as it requires first migrating the fact table to use the fluent advertiser ID instead of Tune-only identifiers (discussed in recent grooming).
 
-### AI-Generated Action Items
+### AI-Detected Action Items
 
 - Vani Kaithi: Post a comment on the ticket about the suggested table naming change to 'userwise_appsflyer_metrics', confirm with Kapil, and potentially raise in show and tell.
 
 ### Decisions
 
-_(none explicitly recorded)_
+- Dan and the organization will require **weekly Lattice updates from all team members** to track AI utilization and justify platform spending ROI.
 
 ## Transcript
 

@@ -7,16 +7,17 @@ meeting_id: "040000008200E00074C5B7101A82E00807EA06122455F29B18EEDC0100000000000
 note_id: 80278833
 recording_id: 14663872
 fellow_url: "https://fluentco.fellow.app/meetings/040000008200E00074C5B7101A82E00807EA06122455F29B18EEDC010000000000000000100000000F2A35276F78644096017DD02BC1E746/"
+meeting_link: "https://fellow.link/9H2S5N3RAGHQ"
 ---
 
 # Data Engineering Sync
 
 ## Participants
 
-| Name | Email | Role | RSVP |
-|------|-------|------|------|
-| Trevor Anderson | tanderson@fluentco.com | organizer | accepted |
-| Jean Carlo Camacho | jcamacho@fluentco.com | attendee | notResponded |
+| Name | Email | Organizer | RSVP |
+|------|-------|-----------|------|
+| Trevor Anderson | tanderson@fluentco.com | yes | accepted |
+| Jean Carlo Camacho | jcamacho@fluentco.com | no | notResponded |
 
 ## Fellow Notes
 
@@ -38,4 +39,4 @@ No AI summary available for this meeting.
 
 ## Transcript
 
-No transcript available (recording existed but transcript returned empty).
+No transcript available for this meeting.

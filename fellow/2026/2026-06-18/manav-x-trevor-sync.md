@@ -7,16 +7,17 @@ meeting_id: "040000008200E00074C5B7101A82E00807EA0612A5440CF490DDDC0100000000000
 note_id: 80285280
 recording_id: 14666354
 fellow_url: "https://fluentco.fellow.app/meetings/040000008200E00074C5B7101A82E00807EA0612A5440CF490DDDC01000000000000000010000000AB76D0CA659EAC419E1852FA011E20DB/"
+meeting_link: "https://fellow.link/WFQQT1G0941X"
 ---
 
 # Manav x Trevor Sync
 
 ## Participants
 
-| Name | Email | Role | RSVP |
-|------|-------|------|------|
-| Trevor Anderson | tanderson@fluentco.com | organizer | accepted |
-| Manav Paul | mpaul@fluentco.com | attendee | notResponded |
+| Name | Email | Organizer | RSVP |
+|------|-------|-----------|------|
+| Trevor Anderson | tanderson@fluentco.com | yes | accepted |
+| Manav Paul | mpaul@fluentco.com | no | notResponded |
 
 ## Fellow Notes
 
@@ -55,7 +56,7 @@ Trevor and Manav held their weekly sync to discuss performance tracking processe
 
 - [00:12:04] Manav is handling a high volume of model audience requests manually this week, including some of the **biggest audience requests ever received** from CMI, the company's largest and highest-paying client.
 - [00:12:19] Manual processing is still required due to the FDSO(?) situation and lack of validation testing for the production-ready automation pipeline, requiring hand processing of seed files, modeling, score ranges, custom audiences with filters, and taxonomy distribution.
-- [00:21:12] Multiple requests came into the AS board recently, with contractors, Manav, and Joseph each picking up tickets. Virginia flagged that many requests are overdue, requiring additional hands beyond the contractors.
+- [00:21:06] Multiple requests came into the AS board recently, with contractors, Manav, and Joseph each picking up tickets. Virginia flagged that many requests are overdue, requiring additional hands beyond the contractors.
 - [00:23:47] Manav will likely pick up Joseph's model audience tickets (approximately 14 modeled audiences) since he's out and clients will expect timely completion of the work.
 
 #### Declared audience pipeline blockers
@@ -67,13 +68,13 @@ Trevor and Manav held their weekly sync to discuss performance tracking processe
 
 #### Segment registry JIRA standardization
 
-- [00:17:06] The original ticket design called for Virginia to get GitHub access and approve new audiences by granting YAML file changes, though Manav believes a **JIRA linkage solution would be better** based on working with the team.
+- [00:17:05] The original ticket design called for Virginia to get GitHub access and approve new audiences by granting YAML file changes, though Manav believes a **JIRA linkage solution would be better** based on working with the team.
 - [00:24:47] Current audience request tickets lack standardization - the rate/cost field is just one giant text field, and **every account manager formats tickets differently** (some put CPM in description, others in comments), making it difficult to switch between people's work.
 - [00:25:06] The standardization plan will separate fields like CPM and POM into distinct required fields with validation, and the AS board will need a full revamp to support the automation pipeline reading tickets directly.
-- [00:29:40] The system could use conditional fields where selecting 'model audience' displays different required fields than other audience types, and Grant also wants standardization for the model audience pipeline.
-- [00:24:39] Manav created a brief outline mapping every field needed and field types for the standardized format, which still needs review with Grant before implementation to ensure it covers model audience requirements.
+- [00:29:45] The system could use conditional fields where selecting 'model audience' displays different required fields than other audience types, and Grant also wants standardization for the model audience pipeline.
+- [00:29:22] Manav created a brief outline mapping every field needed and field types for the standardized format, which still needs review with Grant before implementation to ensure it covers model audience requirements.
 
-### AI-Generated Action Items
+### AI-Detected Action Items
 
 - Manav Paul: Post weekly updates into Lattice every Friday covering AI wins, weekly highlights, next week's focus, blockers, and other updates
 - Manav Paul: Send the DevOps request list (10 items previously shared with David) to Trevor via Slack

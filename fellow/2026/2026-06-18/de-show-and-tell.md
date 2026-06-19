@@ -5,27 +5,27 @@ start_time: "2026-06-18T15:35:00-04:00"
 end_time: "2026-06-18T16:30:00-04:00"
 meeting_id: "040000008200E00074C5B7101A82E00807EA0613B0E313CEA178DC01000000000000000010000000B5A64C8594233547807C65D361AABF12"
 note_id: 80326881
-recording_id: null
 fellow_url: "https://fluentco.fellow.app/meetings/040000008200E00074C5B7101A82E00807EA0613B0E313CEA178DC01000000000000000010000000B5A64C8594233547807C65D361AABF12/"
+meeting_link: "https://fellow.link/AKXRPS2G9JQS"
 ---
 
 # DE - Show and tell
 
 ## Participants
 
-| Name | Email | Role | RSVP |
-|------|-------|------|------|
-| BSilveri | BSilveri@fluentco.com | organizer | accepted |
-| Akhil Gonna | AGonna@fluentco.com | attendee | accepted |
-| BGidwani | BGidwani@fluentco.com | attendee | accepted |
-| JRamesh | JRamesh@fluentco.com | attendee | (no rsvp) |
-| Kapil Sreedharan | ksreedharan@fluentco.com | attendee | accepted |
-| Vani Kaithi | vkaithi@fluentco.com | attendee | (no rsvp) |
-| Venkatesh Mannam | VMannam@fluentco.com | attendee | accepted |
-| Manav Paul | mpaul@fluentco.com | attendee | (no rsvp) |
-| Grant Sajjanshetty | gsajjanshetty@fluentco.com | attendee | accepted |
-| Dan Duling | dduling@fluentco.com | attendee | (no rsvp, optional) |
-| Trevor Anderson | tanderson@fluentco.com | attendee | (no rsvp, optional) |
+| Name | Email | Organizer | RSVP |
+|------|-------|-----------|------|
+| B. Silveri | BSilveri@fluentco.com | yes | accepted |
+| Dan Duling | dduling@fluentco.com | no | — |
+| Trevor Anderson | tanderson@fluentco.com | no | — |
+| Akhil Gonna | AGonna@fluentco.com | no | accepted |
+| B. Gidwani | BGidwani@fluentco.com | no | accepted |
+| J. Ramesh | JRamesh@fluentco.com | no | — |
+| Kapil Sreedharan | ksreedharan@fluentco.com | no | accepted |
+| Vani Kaithi | vkaithi@fluentco.com | no | — |
+| Venkatesh Mannam | VMannam@fluentco.com | no | accepted |
+| Manav Paul | mpaul@fluentco.com | no | — |
+| Granth Sajjanshetty | gsajjanshetty@fluentco.com | no | accepted |
 
 ## Fellow Notes
 
@@ -47,4 +47,4 @@ No AI summary available for this meeting.
 
 ## Transcript
 
-No transcript available for this meeting (no recording).
+No transcript available for this meeting.

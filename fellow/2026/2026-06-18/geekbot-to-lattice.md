@@ -13,12 +13,12 @@ fellow_url: "https://fluentco.fellow.app/meetings/040000008200E00074C5B7101A82E0
 
 ## Participants
 
-| Name | Email | Role | RSVP |
-|------|-------|------|------|
-| Stephanie McCarthy | smccarthy@fluentco.com | organizer | accepted |
-| Dan Duling | dduling@fluentco.com | attendee | accepted |
-| Jack Hall | jhall@fluentco.com | attendee | accepted |
-| Trevor Anderson | tanderson@fluentco.com | attendee | accepted |
+| Name | Email | Organizer | RSVP |
+|------|-------|-----------|------|
+| Stephanie McCarthy | smccarthy@fluentco.com | yes | accepted |
+| Dan Duling | dduling@fluentco.com | no | accepted |
+| Jack Hall | jhall@fluentco.com | no | accepted |
+| Trevor Anderson | tanderson@fluentco.com | no | accepted |
 
 ## Fellow Notes
 
@@ -76,7 +76,7 @@ The group agreed on a **phased rollout approach**: Lattice updates will be deplo
 - [00:18:32] Tech teams will receive separate messaging indicating they should **continue with Geekbot for daily standups** and wait for improved Slack integration before adopting Lattice for weekly updates.
 - [00:19:38] The updates feature already exists in Lattice and some employees have been using it voluntarily, but the organization is now making it an **official expectation for all employees**, especially to track AI achievements and provide worldwide visibility.
 
-### AI-Generated Action Items
+### AI-Detected Action Items
 
 - Stephanie McCarthy: Pass feature request to Lattice product team for native Slack bot integration to allow updates to be submitted directly in Slack without navigating to web interface.
 - Stephanie McCarthy: Investigate Lattice's MCP server integration for posting updates to Slack channels and enabling Claude analysis, then report back to the team with findings.
@@ -238,7 +238,7 @@ The group agreed on a **phased rollout approach**: Lattice updates will be deplo
 [00:15:56] Stephanie McCarthy: Just in my kind of. I was having, I think I was chatting with you guys.
 [00:16:00] Stephanie McCarthy: Maybe not you Dan, but conversations around the Lattice usage people were like, well I don't want to have to do it in Geekbot and in Lattice, so I would kind of love to.
 [00:16:10] Stephanie McCarthy: Which makes sense, right? No one wants to do things twice.
-[00:16:13] Stephanie McCarthy: So I'd love to, you know, roll out a test to make sure that it's able to work and function the way that we want it and gain their bias that they're not Doing, too.
+[00:16:13] Stephanie McCarthy: So I'd love to, you know, roll out a test to make sure that it's able to work and function the way that we want it to and gain their bias that they're not Doing, too.
 [00:16:20] Stephanie McCarthy: So I just want to make sure you're okay with that.
 [00:16:23] Dan Duling: Yeah. You know, and just to show you kind of how, like, the Geekbot, you know, update works, right?
 [00:16:29] Dan Duling: You know, very streamlined.
