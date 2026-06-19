@@ -5,8 +5,9 @@ The contract between the two routines. `fellow-dump` writes files in this format
 
 ## Path
 
-`fellow/{date}/{slug}.md`
+`fellow/{year}/{date}/{slug}.md`
 
+- `{year}` is the four-digit year of the meeting day, local timezone (e.g. `2026`).
 - `{date}` is the meeting day, `YYYY-MM-DD`, local timezone.
 - `{slug}` is the title lowercased, spaces to hyphens, non-alphanumeric stripped.
   If two meetings share a slug, append the start time, e.g. `de-1-1-kapil-0900`.
@@ -39,4 +40,4 @@ captured_at: <ISO 8601 timestamp>
    `participants` to match each meeting onto the Outlook calendar spine, so those
    keys must always be present even if a value is empty (`participants: []`).
 4. **Empty day.** If there were no Fellow meetings, write nothing. daily-note
-   treats a missing `fellow/{date}/` folder as "no Fellow meetings", not an error.
+   treats a missing `fellow/{year}/{date}/` folder as "no Fellow meetings", not an error.

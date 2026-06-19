@@ -49,10 +49,40 @@ One flat factual orientation line. Not a significance summary.
 
 ### `## meetings`
 The Outlook calendar event is the canonical object; Fellow (from the repo) and
-Zoom (from the connector) attach to it.
+Zoom (from the connector) attach to it. One index line per meeting.
 `- HH:MM-HH:MM | <title> | attendees: <name; name> | notes: <fellow_path|zoom_url|none> | outcome: <one factual clause or none> | actions: <action ids or none>`
 
 For Fellow, `notes:` is the repo path, e.g. `fellow/2026-06-17/de-1-1-kapil.md`.
+
+### `## meeting_notes`
+Full per-meeting detail for every meeting that has a Fellow file or Zoom AI
+summary. One block per meeting, ordered by start time. Meetings with no source
+content get a block stating that explicitly — never omit the block entirely.
+
+```
+### <meeting title>
+> <HH:MM-HH:MM> | source: <fellow_path|zoom_url|none>
+
+<AI summary: full text, verbatim from Fellow AI Summary / Zoom AI summary.
+ If multiple paragraphs, keep them all.>
+
+**Discussion:**
+- [HH:MM:SS] <point — one bullet per chapter item or significant transcript moment. Preserve timestamps. Keep full detail; do not compress.>
+
+**Decisions:**
+- <decision text, verbatim>
+
+**Actions:** <AI-NNN (owner: name); ...| none>
+```
+
+Rules:
+- Copy the AI summary verbatim; do not paraphrase or shorten.
+- For each chapter in the Fellow AI summary, emit all bullet points with their
+  timestamps. If there are no chapters, extract key moments from the transcript.
+- If the meeting has no AI summary and no transcript, write
+  `_(no Fellow AI summary or transcript available)_` in place of the summary.
+- Decisions and actions listed here must match those in `## decisions` and
+  `## action_items` exactly.
 
 ### `## action_items`
 `- [ ] id:<AI-NNN> | owner:<name> | due:<YYYY-MM-DD|none> | source:<meeting title|jira DE-XXXX|slack|email> | <verbatim-as-possible text>`
@@ -65,11 +95,99 @@ One line per discrete Jira action.
 `- <DE-XXXX> | <created|transitioned|commented|worklog> | <detail> | <url>`
 
 ### `## doc_activity`
-`- <title> (<page_id>) | space:<KEY> | <created|edited> | <url>`
+One line per page. The detail field describes what the page covers and, where
+discernible from the content, what was added or changed in this session.
+
+`- <title> (<page_id>) | space:<KEY> | <created|edited> | <detail: what the page covers and what was worked on — section names, key content, decisions documented, tables updated, etc.> | <url>`
 
 ### `## comms_highlights`
-Substantive Slack/email only (decision, ask, commitment, status change).
-`- <slack|email> | <channel/thread or subject> | with:<name; name> | <the point, factual> | <url|none>`
+Substantive Slack/email. Cast wide: DM threads with any work content, channel
+messages where the identity participated substantively, emails with decisions or
+asks. One line per thread/email. The detail field should capture the full
+substance of the exchange — what was asked, what was answered, what was decided
+or left open — not just the headline.
+
+`- <slack-dm|slack-channel|slack-mention|email> | <channel/DM partner/subject> | with:<name; name> | <full substance: question asked, answer given, decision made, blocker raised, next step agreed — be specific and complete> | <url|none>`
+
+## Section order (fixed)
+
+1. `## tl;dr`
+2. `## meetings`
+3. `## meeting_notes`
+4. `## action_items`
+5. `## decisions`
+6. `## ticket_activity`
+7. `## doc_activity`
+8. `## comms_highlights`
+9. `## lattice_update`
+10. `## geekbot_em_update`
+11. `## geekbot_tl_update`
+
+### `## lattice_update`
+Draft answers to the five Lattice weekly update questions, based on the day's
+captured activity. Label clearly as a draft. Answer each question with specific,
+factual content drawn from meetings, tickets, docs, and comms. "Next week focus"
+and "blockers" should reflect open action items and known blockers from the day.
+
+```
+## lattice_update
+> draft — review before posting
+
+**AI wins:**
+<specific AI-related work, tools used, automations built or advanced>
+
+**Impact / highlights:**
+<the most significant outcomes, deliverables, or progress from today>
+
+**Next week focus:**
+<what is planned or expected next based on open action items and project state>
+
+**Blockers:**
+<any blockers or asks for support identified today; _(none)_ if clear>
+
+**Other:**
+<anything else worth sharing with Dan and leadership>
+```
+
+### `## geekbot_em_update`
+Draft answers to the four engineering-manager-updates Geekbot questions.
+
+```
+## geekbot_em_update
+> draft — review before posting to #engineering-manager-updates
+
+**What's one thing you learned or discovered since last check-in?**
+<specific insight, finding, or new information from today's meetings or work>
+
+**Is anything blocking you or slowing you down?**
+<blockers from today; _(none)_ if clear>
+
+**What's your focus for the next few days?**
+<near-term priorities based on open action items and project state>
+
+**Anything you want to flag for the group?**
+<cross-functional issues, risks, or items worth leadership awareness>
+```
+
+### `## geekbot_tl_update`
+Draft answers to the tech-leaders-updates Geekbot questions.
+
+```
+## geekbot_tl_update
+> draft — review before posting to #tech-leaders-updates
+
+**Team execution capacity this week:**
+<honest assessment of the team's bandwidth and throughput based on today's signals>
+
+**Team's top outcomes or deliverables this week:**
+<specific completed or advanced deliverables; reference tickets, docs, meetings>
+
+**Blockers affecting delivery, partner experience, or cross-functional alignment:**
+<blockers that may affect sprint delivery, partners, or other teams; _(none)_ if clear>
+
+**Anything slowing team execution:**
+<impediments, resourcing gaps, process friction, or escalation needs>
+```
 
 ## Empty-section convention
 
@@ -77,5 +195,7 @@ Substantive Slack/email only (decision, ask, commitment, status change).
 ## decisions
 _(none)_
 ```
+
+`## meeting_notes` uses `_(none)_` only when there were literally zero meetings.
 
 See `daily/_TEMPLATE.md` for a complete example.

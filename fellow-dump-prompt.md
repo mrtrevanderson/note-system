@@ -12,14 +12,15 @@ makes the Fellow connector initialize in an unattended run.)
 
 Subagent task: copy yesterday's Fellow meetings into this repository.
 
-1. Read config.yaml and schema/fellow-dump-schema.md from the repo root.
-2. Compute yesterday's date in identity.timezone. Call it DATE (YYYY-MM-DD).
+1. Read config.yaml and fellow-dump-schema.md from the repo root.
+2. Compute yesterday's date in identity.timezone. Call it DATE (YYYY-MM-DD) and
+   YEAR (the four-digit year, e.g. 2026).
 3. Verify Fellow connector tools are available. If not, commit nothing and report
    "Fellow connector not initialized".
 4. List all Fellow meetings that occurred on DATE. For each meeting, retrieve the
    full AI notes/summary, the full transcript, the participants, and the Fellow URL.
-5. Write one file per meeting to fellow/DATE/<slug>.md, exactly per
-   schema/fellow-dump-schema.md. Copy the AI notes and transcript VERBATIM; do
+5. Write one file per meeting to fellow/YEAR/DATE/<slug>.md, exactly per
+   fellow-dump-schema.md. Copy the AI notes and transcript VERBATIM; do
    not shorten anything.
 6. If there were no meetings on DATE, commit nothing and report "no meetings".
 7. Commit the new files directly to the branch in config branch.name and push.
@@ -33,5 +34,5 @@ Subagent task: copy yesterday's Fellow meetings into this repository.
 - Connectors: keep ONLY Fellow.ai; remove the rest.
 - Permissions: enable **Allow unrestricted branch pushes** for the repo.
 - Trigger: Scheduled, daily at the `schedule.fellow_dump_local` time (05:00).
-- Validate with **Run now**, then confirm `fellow/<yesterday>/` appears on `main`.
+- Validate with **Run now**, then confirm `fellow/YYYY/YYYY-MM-DD/` appears on `main`.
 ```

@@ -30,7 +30,7 @@ schedule:
 
 # ---- fellow-dump routine ----
 fellow_dump:
-  output_dir: "fellow/{date}/"            # one markdown file per meeting
+  output_dir: "fellow/{year}/{date}/"     # one markdown file per meeting
   # Format is defined in schema/fellow-dump-schema.md (the contract daily-note reads).
 
 # ---- daily-note routine ----
@@ -42,7 +42,7 @@ sources:
   # Outlook calendar is the spine. Fellow is read from the repo (NOT the connector),
   # because fellow-dump already captured it. The rest are live connectors.
   outlook:    { enabled: true,  via: connector }
-  fellow:     { enabled: true,  via: repo, input_dir: "fellow/{date}/" }
+  fellow:     { enabled: true,  via: repo, input_dir: "fellow/{year}/{date}/" }
   zoom:       { enabled: true,  via: connector }
   jira:       { enabled: true,  via: connector }
   confluence: { enabled: true,  via: connector }
