@@ -56,8 +56,8 @@ confluence:
 
 slack:
   channel_allowlist:
-    - "#data-engineering"   # replace with your real team channels
-    - "#fluent-ai"
+    - "#data-engineering-core-team"   # replace with your real team channels
+    - "#data-engineering-team"
   channel_blocklist:
     - "#claude-notes"       # output channel, not an input
 
