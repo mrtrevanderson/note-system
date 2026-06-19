@@ -156,11 +156,56 @@ match (emit canonical name), keywords via verbatim `entities.keywords` match.
 Fill per-line `entities:` fields and build the frontmatter `entities` union
 (deduped, sorted).
 
-## Step 5: render, write, commit
+## Step 5: draft update sections
+
+Using all captured data from Steps 1–4 as source material, draft the three
+standing update sections. These are written for a human to review and post;
+be specific and factual, draw directly from the day's meetings, tickets, docs,
+and comms. Do not invent or speculate; if a question has no answer from today's
+data, write `_(nothing notable today)_`.
+
+### lattice_update
+
+Answer the five Lattice weekly update questions:
+- **AI wins**: any AI tooling used, automation advanced, or AI-related project
+  progress (e.g. segment registry pipeline, Claude integrations, MCP work).
+- **Impact / highlights**: the most significant outcomes from today — decisions
+  made, deliverables shipped, meetings with concrete outputs, docs published.
+- **Next week focus**: synthesize from open action items and known project state
+  to project what is coming; be specific (ticket IDs, project names).
+- **Blockers**: any blockers or asks for help surfaced today.
+- **Other**: anything else worth sharing with leadership.
+
+### geekbot_em_update
+
+Answer the four engineering-manager-updates questions:
+- **Learned / discovered**: a specific insight or new information from today —
+  could be a technical finding, a process gap, a team signal from a 1:1, or a
+  cross-functional development.
+- **Blocking / slowing**: any personal blockers or dependencies on others.
+- **Next few days focus**: near-term priorities; be specific.
+- **Flag for the group**: anything cross-functional, a risk, or something other
+  EMs or leadership should know about.
+
+### geekbot_tl_update
+
+Answer the tech-leaders-updates questions:
+- **Execution capacity**: honest team bandwidth assessment from signals today
+  (blockers, manual workload, staffing, competing priorities).
+- **Top outcomes / deliverables**: specific team outputs — reference ticket IDs,
+  doc titles, pipeline milestones; draw from ticket_activity, doc_activity,
+  and 1:1 meeting notes.
+- **Blockers affecting delivery or partners**: anything that could slip delivery
+  or create friction for partners or cross-functional teams.
+- **Slowing execution**: impediments, resourcing gaps, process issues, or items
+  that may require sprint adjustment or escalation.
+
+## Step 6: render, write, commit
 
 1. Render strictly per `schema/daily-log-schema.md` in the fixed section order:
    `tl;dr` → `meetings` → `meeting_notes` → `action_items` → `decisions` →
-   `ticket_activity` → `doc_activity` → `comms_highlights`.
+   `ticket_activity` → `doc_activity` → `comms_highlights` → `lattice_update` →
+   `geekbot_em_update` → `geekbot_tl_update`.
    - `meetings`: one pipe-grammar line per meeting (index only).
    - `meeting_notes`: one block per meeting, ordered by start time. Each block
      has the `### Title`, `> time | source:` header, full AI summary verbatim,
@@ -174,6 +219,6 @@ Fill per-line `entities:` fields and build the frontmatter `entities` union
 3. Write `daily/DATE.md`. Commit directly to `branch.name` and push. No PR, no
    claude/ branch. (previous mode is deterministic, so overwrite if it exists.)
 
-## Step 6: report back
+## Step 7: report back
 
 Return the manifest: DATE, the three source-status lists, counts, capture_notes.

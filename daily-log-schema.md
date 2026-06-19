@@ -119,6 +119,75 @@ or left open — not just the headline.
 6. `## ticket_activity`
 7. `## doc_activity`
 8. `## comms_highlights`
+9. `## lattice_update`
+10. `## geekbot_em_update`
+11. `## geekbot_tl_update`
+
+### `## lattice_update`
+Draft answers to the five Lattice weekly update questions, based on the day's
+captured activity. Label clearly as a draft. Answer each question with specific,
+factual content drawn from meetings, tickets, docs, and comms. "Next week focus"
+and "blockers" should reflect open action items and known blockers from the day.
+
+```
+## lattice_update
+> draft — review before posting
+
+**AI wins:**
+<specific AI-related work, tools used, automations built or advanced>
+
+**Impact / highlights:**
+<the most significant outcomes, deliverables, or progress from today>
+
+**Next week focus:**
+<what is planned or expected next based on open action items and project state>
+
+**Blockers:**
+<any blockers or asks for support identified today; _(none)_ if clear>
+
+**Other:**
+<anything else worth sharing with Dan and leadership>
+```
+
+### `## geekbot_em_update`
+Draft answers to the four engineering-manager-updates Geekbot questions.
+
+```
+## geekbot_em_update
+> draft — review before posting to #engineering-manager-updates
+
+**What's one thing you learned or discovered since last check-in?**
+<specific insight, finding, or new information from today's meetings or work>
+
+**Is anything blocking you or slowing you down?**
+<blockers from today; _(none)_ if clear>
+
+**What's your focus for the next few days?**
+<near-term priorities based on open action items and project state>
+
+**Anything you want to flag for the group?**
+<cross-functional issues, risks, or items worth leadership awareness>
+```
+
+### `## geekbot_tl_update`
+Draft answers to the tech-leaders-updates Geekbot questions.
+
+```
+## geekbot_tl_update
+> draft — review before posting to #tech-leaders-updates
+
+**Team execution capacity this week:**
+<honest assessment of the team's bandwidth and throughput based on today's signals>
+
+**Team's top outcomes or deliverables this week:**
+<specific completed or advanced deliverables; reference tickets, docs, meetings>
+
+**Blockers affecting delivery, partner experience, or cross-functional alignment:**
+<blockers that may affect sprint delivery, partners, or other teams; _(none)_ if clear>
+
+**Anything slowing team execution:**
+<impediments, resourcing gaps, process friction, or escalation needs>
+```
 
 ## Empty-section convention
 
