@@ -1,8 +1,10 @@
 # note-system configuration
-# One repo, two routines. Both read this file at the start of every run.
-#   - fellow-dump   (runs first) writes raw Fellow transcripts to fellow/{date}/
-#   - daily-note    (runs later)  reads fellow/{date}/ and the live connectors,
-#                                 then writes the daily log to daily/{date}.md
+# One repo, three routines. All read this file at the start of every run.
+#   - fellow-dump   (runs first, daily)   writes raw Fellow transcripts to fellow/{year}/{date}/
+#   - daily-note    (runs later, daily)   reads fellow/{year}/{date}/ and the live connectors,
+#                                         then writes the daily log to daily/{date}.md
+#   - weekly-note   (runs Monday, weekly) reads daily/*.md for the past week,
+#                                         writes the weekly log to weekly/{year}/{week}.md
 # Editing this file never requires touching collection logic.
 
 identity:
@@ -27,6 +29,17 @@ schedule:
   # comfortable headroom to finish and push before daily-note clones.
   fellow_dump_local: "05:00"
   daily_note_local:  "06:00"
+  # Weekly runs Monday morning so the full prior week (Mon-Fri) is closed.
+  weekly_note_local: "07:00"
+  weekly_note_day:   "Monday"
+
+# ---- weekly-note routine ----
+weekly:
+  output_dir: "weekly/{year}/"
+  output_file: "weekly/{year}/{week}.md"   # {week} = ISO week, e.g. 2026-W26
+  commit_message: "weekly log: {week}"
+  # Reads all daily/{date}.md files whose date falls in the previous Mon-Fri window.
+  input_dir: "daily/"
 
 # ---- fellow-dump routine ----
 fellow_dump:
