@@ -109,6 +109,22 @@ file (from the repo) and the Zoom assets to the event they belong to.
   or substantially changed. Keep the detail to 1–3 factual clauses; do not
   quote large blocks of page text.
 
+### GitHub (PR and commit activity)
+
+Wrap in an error boundary; if GitHub tools are unavailable write
+`_(GitHub connector not available)_` in `pr_activity` and continue.
+
+- List PRs across DE repos (e.g. `centraldata_ingestion`, and any others in
+  `config.yaml` `github.repos` if present) updated in the window.
+- For each PR: get title, author, state change (opened/merged/closed), any
+  review submitted (approved/changes-requested + reviewer name), CI check
+  status if failed, and a one-line description of what the PR does.
+- Capture commits pushed in the window authored by the identity or team
+  roster members, excluding automated/bot commits.
+- Apply the same filter as comms: skip pure noise (passing CI, dependabot
+  bumps, trivial merge commits). Keep anything a human acted on.
+- One line per PR event, one line per notable commit, per the schema format.
+
 ### Slack (last, most fragile)
 
 - **DMs**: search for all DM conversations active in the window using
@@ -204,8 +220,8 @@ Answer the tech-leaders-updates questions:
 
 1. Render strictly per `schema/daily-log-schema.md` in the fixed section order:
    `tl;dr` → `meetings` → `meeting_notes` → `action_items` → `decisions` →
-   `ticket_activity` → `doc_activity` → `comms_highlights` → `lattice_update` →
-   `geekbot_em_update` → `geekbot_tl_update`.
+   `ticket_activity` → `doc_activity` → `pr_activity` → `comms_highlights` →
+   `lattice_update` → `geekbot_em_update` → `geekbot_tl_update`.
    - `meetings`: one pipe-grammar line per meeting (index only).
    - `meeting_notes`: one block per meeting, ordered by start time. Each block
      has the `### Title`, `> time | source:` header, full AI summary verbatim,

@@ -61,6 +61,11 @@ sources:
   confluence: { enabled: true,  via: connector }
   slack:      { enabled: true,  via: connector }   # noisiest; captured last
 
+github:
+  org: "FluentCo"
+  repos:
+    - "centraldata_ingestion"   # add more DE repos here as needed
+
 jira:
   project_keys: ["DE"]
 

@@ -70,6 +70,13 @@ One line per ticket touched during the week, summarizing all activity across day
 One line per page touched during the week, deduplicated across days.
 `- <title> (<page_id>) | space:<KEY> | <created|edited> | dates: <YYYY-MM-DD; YYYY-MM-DD> | <what the page covers and what was worked on> | <url>`
 
+### `## pr_activity`
+All PR and commit activity across DE repos for the week, aggregated from
+daily logs and supplemented with live GitHub data. One line per PR (showing
+its full arc across the week), one line per notable commit cluster.
+
+`- <repo> | PR #<N> <title> | <opened YYYY-MM-DD, merged YYYY-MM-DD | still open> | author:<name> | reviewers:<name; name> | <what it does and current status> | <url>`
+
 ### `## comms_highlights`
 The most substantive Slack/email exchanges from the week, deduplicated.
 `- <slack-dm|slack-channel|email> | <partner/subject> | with:<name; name> | date:<YYYY-MM-DD> | <full substance> | <url|none>`
@@ -217,10 +224,11 @@ Final weekly draft for `#tech-leaders-updates`.
 6. `## action_items`
 7. `## ticket_activity`
 8. `## doc_activity`
-9. `## comms_highlights`
-10. `## lattice_update`
-11. `## geekbot_em_update`
-12. `## geekbot_tl_update`
+9. `## pr_activity`
+11. `## comms_highlights`
+12. `## lattice_update`
+13. `## geekbot_em_update`
+14. `## geekbot_tl_update`
 
 ## Empty-section convention
 

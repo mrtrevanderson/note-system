@@ -100,6 +100,17 @@ discernible from the content, what was added or changed in this session.
 
 `- <title> (<page_id>) | space:<KEY> | <created|edited> | <detail: what the page covers and what was worked on — section names, key content, decisions documented, tables updated, etc.> | <url>`
 
+### `## pr_activity`
+Pull request and commit activity from GitHub for the day. Covers all repos
+in the DE org/team. One line per PR event or notable commit.
+
+`- <repo> | PR #<N> <title> | <opened|merged|closed|reviewed|commented> | author:<name> | <detail: what the PR does, what the review said, CI status> | <url>`
+`- <repo> | commit <short-sha> | author:<name> | <commit message> | <url>`
+
+Only capture substantive events: PRs opened/merged/closed, review approvals
+or rejections with comments, CI failures. Skip automated bot commits and
+passing CI noise unless they represent a meaningful signal.
+
 ### `## comms_highlights`
 Substantive Slack/email. Cast wide: DM threads with any work content, channel
 messages where the identity participated substantively, emails with decisions or
@@ -118,10 +129,11 @@ or left open — not just the headline.
 5. `## decisions`
 6. `## ticket_activity`
 7. `## doc_activity`
-8. `## comms_highlights`
-9. `## lattice_update`
-10. `## geekbot_em_update`
-11. `## geekbot_tl_update`
+8. `## pr_activity`
+9. `## comms_highlights`
+10. `## lattice_update`
+11. `## geekbot_em_update`
+12. `## geekbot_tl_update`
 
 ### `## lattice_update`
 Draft answers to the five Lattice weekly update questions, based on the day's

@@ -68,6 +68,15 @@ Group all doc lines by page_id. Emit one line per page with a `dates:` field
 listing every day it was touched. Carry the detail description from the most
 recent daily log entry for that page.
 
+### pr_activity
+Aggregate all `pr_activity` lines from the daily logs. Deduplicate by PR
+number — if the same PR appears across multiple days, merge into one line
+showing its full arc (opened Mon, merged Thu). Supplement with a live GitHub
+query for the full week window to catch any PRs not reflected in daily logs:
+list PRs updated in WEEK_START–WEEK_END across `github.repos` in config.
+If GitHub tools are unavailable, use only the daily log data and note
+`_(GitHub connector unavailable — PR data from daily logs only)_`.
+
 ### comms_highlights
 Collect all comms lines. Deduplicate threads that appear across multiple days
 (same URL or same DM partner + same topic). Add a `date:` field. Keep the
@@ -184,8 +193,9 @@ Omit members with zero activity. Skip this chart entirely if Step 5 failed.
 
 1. Render per `weekly-log-schema.md` in the fixed section order:
    `tl;dr` → `team_activity` → `charts` → `meetings` → `decisions` →
-   `action_items` → `ticket_activity` → `doc_activity` → `comms_highlights`
-   → `lattice_update` → `geekbot_em_update` → `geekbot_tl_update`.
+   `action_items` → `ticket_activity` → `doc_activity` → `pr_activity` →
+   `comms_highlights` → `lattice_update` → `geekbot_em_update` →
+   `geekbot_tl_update`.
 2. Write `weekly/YEAR/WEEK_LABEL.md` (e.g. `weekly/2026/2026-W26.md`).
    Create the year subfolder if it does not exist.
 3. Commit directly to `branch.name` and push. No PR, no claude/ branch.

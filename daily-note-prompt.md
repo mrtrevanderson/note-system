@@ -30,8 +30,9 @@ Subagent task:
 ## Setup checklist
 
 - Repository: the same note-system repo.
-- Connectors: attach Microsoft 365, Zoom, Atlassian, and Slack. Fellow is NOT
-  needed here (it is read from the repo), but leaving it attached is harmless.
+- Connectors: attach Microsoft 365, Zoom, Atlassian, Slack, and GitHub. Fellow
+  is NOT needed here (it is read from the repo), but leaving it attached is
+  harmless. GitHub is used for pr_activity; degrades gracefully if missing.
 - Permissions: enable **Allow unrestricted branch pushes** for the repo.
 - Trigger: Scheduled, daily at `schedule.daily_note_local` (06:00), a full hour
   after fellow-dump so transcripts are committed before this clones the repo.

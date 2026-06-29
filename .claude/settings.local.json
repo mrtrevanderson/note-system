@@ -25,7 +25,12 @@
       "Bash(git -C ~/Documents/Claude-Code/note-system add daily-log-schema.md SKILL.md)",
       "Bash(git -C ~/Documents/Claude-Code/note-system commit -m ' *)",
       "Bash(git -C ~/Documents/Claude-Code/note-system add daily-note-prompt.md)",
-      "Bash(git -C ~/Documents/Claude-Code/note-system add -A)"
+      "Bash(git -C ~/Documents/Claude-Code/note-system add -A)",
+      "Bash(git -C ~/Documents/Claude-Code/note-system add weekly-log-schema.md WEEKLY-SKILL.md)",
+      "Bash(git -C ~/Documents/Claude-Code/note-system pull --rebase)",
+      "Bash(git -C ~/Documents/Claude-Code/note-system stash)",
+      "Bash(git -C ~/Documents/Claude-Code/note-system stash pop)",
+      "Bash(git -C ~/Documents/Claude-Code/note-system add weekly-log-schema.md WEEKLY-SKILL.md weekly-note-prompt.md)"
     ]
   }
 }
