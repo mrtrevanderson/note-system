@@ -118,6 +118,56 @@ Final weekly draft for `#engineering-manager-updates`.
 <cross-functional items, risks, or leadership flags>
 ```
 
+### `## charts`
+Mermaid diagrams generated from the week's aggregated counts. Renders inline
+on GitHub. Three charts in fixed order.
+
+**Chart 1 — Daily meeting load** (xychart-beta bar):
+X-axis: Mon–Fri dates. Y-axis: meeting count. One bar per day.
+
+**Chart 2 — Action item velocity** (xychart-beta bar):
+Two grouped values per week: total created, total closed. Shows whether the
+week was net-positive or net-negative on commitments.
+
+**Chart 3 — Daily activity breakdown** (xychart-beta line):
+Three lines across Mon–Fri: tickets touched, docs edited, comms highlights.
+Each point is the count from that day's daily log.
+
+Example (populate with real counts):
+```
+## charts
+
+### Meeting load
+```mermaid
+xychart-beta
+  title "Meetings per day"
+  x-axis ["Mon 06-23", "Tue 06-24", "Wed 06-25", "Thu 06-26", "Fri 06-27"]
+  y-axis "Meetings" 0 --> 12
+  bar [3, 5, 4, 6, 2]
+```
+
+### Action item velocity
+```mermaid
+xychart-beta
+  title "Action items — week of 2026-W26"
+  x-axis ["Created", "Closed"]
+  y-axis "Count" 0 --> 20
+  bar [12, 7]
+```
+
+### Daily activity
+```mermaid
+xychart-beta
+  title "Daily activity breakdown"
+  x-axis ["Mon", "Tue", "Wed", "Thu", "Fri"]
+  y-axis "Count" 0 --> 25
+  line [2, 3, 1, 4, 2]
+  line [5, 8, 3, 12, 4]
+  line [3, 4, 2, 5, 1]
+```
+```
+_(legend: line 1 = tickets, line 2 = docs, line 3 = comms)_
+
 ### `## geekbot_tl_update`
 Final weekly draft for `#tech-leaders-updates`.
 
@@ -137,6 +187,20 @@ Final weekly draft for `#tech-leaders-updates`.
 **Anything slowing team execution:**
 <impediments, resourcing gaps, or escalation needs>
 ```
+
+## Section order (fixed)
+
+1. `## tl;dr`
+2. `## charts`
+3. `## meetings`
+4. `## decisions`
+5. `## action_items`
+6. `## ticket_activity`
+7. `## doc_activity`
+8. `## comms_highlights`
+9. `## lattice_update`
+10. `## geekbot_em_update`
+11. `## geekbot_tl_update`
 
 ## Empty-section convention
 

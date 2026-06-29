@@ -110,7 +110,30 @@ complete Mon–Fri picture, not just the most recent day.
 - **Slowing execution**: impediments, process friction, resourcing gaps,
   or items that may require sprint adjustment or escalation.
 
-## Step 5: compute frontmatter counts and entities
+## Step 5: generate charts
+
+From the per-day counts collected in Step 2, generate three Mermaid
+`xychart-beta` blocks. Use the short day label `Mon MM-DD` for X-axis labels.
+
+**Chart 1 — Meeting load**: one bar per day, Y = meeting count from that
+day's frontmatter `counts.meetings`. Set the Y-axis upper bound to
+`max(counts) + 2` rounded up to the nearest 2.
+
+**Chart 2 — Action item velocity**: two bars total for the week:
+- "Created" = sum of all `counts.action_items` across the daily logs.
+- "Closed" = count of `[x]` action items identified in Step 3.
+Set Y-axis upper bound to `max(created, closed) + 3`.
+
+**Chart 3 — Daily activity breakdown**: three lines across Mon–Fri:
+- Line 1 (tickets): `counts.ticket_activity` per day.
+- Line 2 (docs): `counts.doc_activity` per day.
+- Line 3 (comms): `counts.comms_highlights` per day.
+Set Y-axis upper bound to `max(all values) + 3` rounded up.
+
+If a day's log is missing, use `0` for all its values and note the gap in
+the chart title (e.g. `"Meetings per day (Wed missing)"`).
+
+## Step 6: compute frontmatter counts and entities
 
 - `counts.meetings`: total meeting lines.
 - `counts.decisions`: total deduplicated decisions.
@@ -122,18 +145,18 @@ complete Mon–Fri picture, not just the most recent day.
 - `daily_logs_read`: dates of successfully read daily logs.
 - `daily_logs_missing`: dates in the Mon–Fri window with no daily log found.
 
-## Step 6: render, write, commit
+## Step 7: render, write, commit
 
 1. Render per `weekly-log-schema.md` in the fixed section order:
-   `tl;dr` → `meetings` → `decisions` → `action_items` → `ticket_activity` →
-   `doc_activity` → `comms_highlights` → `lattice_update` → `geekbot_em_update`
-   → `geekbot_tl_update`.
+   `tl;dr` → `charts` → `meetings` → `decisions` → `action_items` →
+   `ticket_activity` → `doc_activity` → `comms_highlights` → `lattice_update`
+   → `geekbot_em_update` → `geekbot_tl_update`.
 2. Write `weekly/YEAR/WEEK_LABEL.md` (e.g. `weekly/2026/2026-W26.md`).
    Create the year subfolder if it does not exist.
 3. Commit directly to `branch.name` and push. No PR, no claude/ branch.
    Overwrite if the file already exists.
 
-## Step 7: report back
+## Step 8: report back
 
 Return the manifest: WEEK_LABEL, daily_logs_read, daily_logs_missing, counts,
 and any notes about deduplication or synthesis decisions made.
