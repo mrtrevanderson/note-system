@@ -27,8 +27,9 @@ Subagent task:
 ## Setup checklist
 
 - Repository: the same note-system repo.
-- Connectors: none required. The weekly routine reads only from the repo.
-  Leaving connectors attached is harmless but they will not be used.
+- Connectors: attach **Atlassian** for team Jira activity (Step 5 of the skill).
+  All other connectors are optional — the routine reads daily logs from the repo
+  and only calls Jira live for team member activity.
 - Permissions: enable **Allow unrestricted branch pushes** for the repo.
 - Trigger: Scheduled, weekly on Monday at `schedule.weekly_note_local` (07:00).
   This runs after the Monday daily-note (06:00) so Monday's log is already

@@ -110,10 +110,41 @@ complete Mon–Fri picture, not just the most recent day.
 - **Slowing execution**: impediments, process friction, resourcing gaps,
   or items that may require sprint adjustment or escalation.
 
-## Step 5: generate charts
+## Step 5: pull team activity from Jira
 
-From the per-day counts collected in Step 2, generate three Mermaid
-`xychart-beta` blocks. Use the short day label `Mon MM-DD` for X-axis labels.
+Query Jira for all DE team members in `roster` over the full week window
+(WEEK_START 00:00 to WEEK_END 23:59, identity.timezone). This is a live
+connector call; wrap in an error boundary and note any failure in the manifest.
+
+For each roster member:
+1. Look up their Jira account ID via `lookupJiraAccountId` (use their email
+   from config if available, otherwise their display name).
+2. Query `searchJiraIssuesUsingJql`:
+   ```
+   (assignee = "<accountId>" OR reporter = "<accountId>")
+   AND project in (DE)
+   AND updated >= "WEEK_START" AND updated <= "WEEK_END"
+   ```
+3. For each issue returned, call `getJiraIssue` and filter to activity
+   (comments, transitions, worklogs) authored by that person in the window.
+4. Record: person name, list of ticket IDs with a one-line description of
+   what they did on each (created, commented, transitioned From→To, worklog Xh).
+
+Aggregate into the `## team_activity` section:
+- One `### Name` block per person with activity, ordered by ticket count desc.
+- Members with zero activity: a single trailing line listing their names.
+- Team summary line with total tickets and unique team members active.
+- Hold per-person ticket counts for the Chart 4 Mermaid bar.
+
+If the Jira connector is unavailable, write `_(team Jira data unavailable this
+week)_` in the section and skip Chart 4.
+
+## Step 6: generate charts
+
+From the per-day counts (Step 2) and team activity data (Step 5):
+
+Generate four Mermaid `xychart-beta` blocks. Use the short day label
+`Mon MM-DD` for X-axis labels on the daily charts.
 
 **Chart 1 — Meeting load**: one bar per day, Y = meeting count from that
 day's frontmatter `counts.meetings`. Set the Y-axis upper bound to
@@ -133,6 +164,10 @@ Set Y-axis upper bound to `max(all values) + 3` rounded up.
 If a day's log is missing, use `0` for all its values and note the gap in
 the chart title (e.g. `"Meetings per day (Wed missing)"`).
 
+**Chart 4 — Team ticket activity**: X-axis = first names of team members with
+activity this week, ordered descending by ticket count. Y-axis = tickets touched.
+Omit members with zero activity. Skip this chart entirely if Step 5 failed.
+
 ## Step 6: compute frontmatter counts and entities
 
 - `counts.meetings`: total meeting lines.
@@ -148,9 +183,9 @@ the chart title (e.g. `"Meetings per day (Wed missing)"`).
 ## Step 7: render, write, commit
 
 1. Render per `weekly-log-schema.md` in the fixed section order:
-   `tl;dr` → `charts` → `meetings` → `decisions` → `action_items` →
-   `ticket_activity` → `doc_activity` → `comms_highlights` → `lattice_update`
-   → `geekbot_em_update` → `geekbot_tl_update`.
+   `tl;dr` → `team_activity` → `charts` → `meetings` → `decisions` →
+   `action_items` → `ticket_activity` → `doc_activity` → `comms_highlights`
+   → `lattice_update` → `geekbot_em_update` → `geekbot_tl_update`.
 2. Write `weekly/YEAR/WEEK_LABEL.md` (e.g. `weekly/2026/2026-W26.md`).
    Create the year subfolder if it does not exist.
 3. Commit directly to `branch.name` and push. No PR, no claude/ branch.

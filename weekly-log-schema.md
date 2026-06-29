@@ -118,9 +118,24 @@ Final weekly draft for `#engineering-manager-updates`.
 <cross-functional items, risks, or leadership flags>
 ```
 
+### `## team_activity`
+Live Jira data for the full DE team for the week. One block per team member
+who had activity; ordered by ticket count descending. Members with zero
+activity are listed in a single trailing line.
+
+```
+### <Name>
+- tickets_touched: N
+- <DE-XXXX> | <status> | <summary — what they did: transitioned, commented, created, worked> | <url>
+- <DE-XXXX> | ...
+```
+
+Follow with a team-level summary line:
+`> Team total: N tickets across M team members. Sprint: <sprint name if retrievable>.`
+
 ### `## charts`
 Mermaid diagrams generated from the week's aggregated counts. Renders inline
-on GitHub. Three charts in fixed order.
+on GitHub. Four charts in fixed order.
 
 **Chart 1 — Daily meeting load** (xychart-beta bar):
 X-axis: Mon–Fri dates. Y-axis: meeting count. One bar per day.
@@ -132,6 +147,10 @@ week was net-positive or net-negative on commitments.
 **Chart 3 — Daily activity breakdown** (xychart-beta line):
 Three lines across Mon–Fri: tickets touched, docs edited, comms highlights.
 Each point is the count from that day's daily log.
+
+**Chart 4 — Team ticket activity** (xychart-beta bar):
+X-axis: each roster member who had Jira activity this week (first name only
+for space). Y-axis: tickets touched. Ordered descending.
 
 Example (populate with real counts):
 ```
@@ -191,16 +210,17 @@ Final weekly draft for `#tech-leaders-updates`.
 ## Section order (fixed)
 
 1. `## tl;dr`
-2. `## charts`
-3. `## meetings`
-4. `## decisions`
-5. `## action_items`
-6. `## ticket_activity`
-7. `## doc_activity`
-8. `## comms_highlights`
-9. `## lattice_update`
-10. `## geekbot_em_update`
-11. `## geekbot_tl_update`
+2. `## team_activity`
+3. `## charts`
+4. `## meetings`
+5. `## decisions`
+6. `## action_items`
+7. `## ticket_activity`
+8. `## doc_activity`
+9. `## comms_highlights`
+10. `## lattice_update`
+11. `## geekbot_em_update`
+12. `## geekbot_tl_update`
 
 ## Empty-section convention
 
