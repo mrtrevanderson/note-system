@@ -111,19 +111,30 @@ file (from the repo) and the Zoom assets to the event they belong to.
 
 ### GitHub (PR and commit activity)
 
-Wrap in an error boundary; if GitHub tools are unavailable write
-`_(GitHub connector not available)_` in `pr_activity` and continue.
+Wrap in an error boundary; write `_(PR data unavailable)_` in `pr_activity`
+and continue if all approaches fail.
 
-- List PRs across DE repos (e.g. `centraldata_ingestion`, and any others in
-  `config.yaml` `github.repos` if present) updated in the window.
-- For each PR: get title, author, state change (opened/merged/closed), any
-  review submitted (approved/changes-requested + reviewer name), CI check
-  status if failed, and a one-line description of what the PR does.
-- Capture commits pushed in the window authored by the identity or team
-  roster members, excluding automated/bot commits.
-- Apply the same filter as comms: skip pure noise (passing CI, dependabot
-  bumps, trivial merge commits). Keep anything a human acted on.
-- One line per PR event, one line per notable commit, per the schema format.
+**Primary path — Atlassian Teamwork Graph (preferred, no GitHub connector needed):**
+For each ticket in `ticket_activity`, call `getTeamworkGraphContext` with
+`objectType: JiraWorkItem` and `objectIdentifier: DE-XXXX`, filtering
+`targetObjectTypes: [ExternalPullRequest, ExternalRepository]`. This surfaces
+any GitHub PRs linked to the ticket via the Jira-GitHub integration.
+For each linked PR: capture repo, PR number, title, author, state
+(open/merged/closed), and review status.
+
+**Secondary path — GitHub connector (if attached to the routine):**
+If a native GitHub tool is available, use it to list PRs updated in the
+window across `github.repos` in config. For each PR: title, author, state
+change, any review submitted (approved/changes-requested + reviewer name),
+CI status if failed.
+
+**Commit activity:**
+Via either path, capture commits pushed in the window by identity or roster
+members. Exclude bot commits (dependabot, gitnotebooks, copilot).
+
+Apply the comms filter: skip passing CI noise, trivial merge commits. Keep
+anything a human acted on — opened, reviewed, merged, commented on.
+One line per PR event, one line per notable commit cluster, per the schema.
 
 ### Slack (last, most fragile)
 

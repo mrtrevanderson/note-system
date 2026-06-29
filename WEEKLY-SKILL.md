@@ -71,11 +71,11 @@ recent daily log entry for that page.
 ### pr_activity
 Aggregate all `pr_activity` lines from the daily logs. Deduplicate by PR
 number — if the same PR appears across multiple days, merge into one line
-showing its full arc (opened Mon, merged Thu). Supplement with a live GitHub
-query for the full week window to catch any PRs not reflected in daily logs:
-list PRs updated in WEEK_START–WEEK_END across `github.repos` in config.
-If GitHub tools are unavailable, use only the daily log data and note
-`_(GitHub connector unavailable — PR data from daily logs only)_`.
+showing its full arc (opened Mon, merged Thu). Supplement with live data:
+call `getTeamworkGraphContext` on all tickets in `ticket_activity` with
+`targetObjectTypes: [ExternalPullRequest]` to surface any linked PRs not
+already captured in the daily logs. If neither daily log data nor Atlassian
+graph data is available, write `_(PR data unavailable this week)_`.
 
 ### comms_highlights
 Collect all comms lines. Deduplicate threads that appear across multiple days
