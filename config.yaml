@@ -41,6 +41,12 @@ weekly:
   # Reads all daily/{date}.md files whose date falls in the previous Mon-Fri window.
   input_dir: "daily/"
 
+# ---- quarterly tracking ----
+quarter:
+  label: "Q3 2026"
+  start: "2026-07-01"   # first day of the quarter (inclusive)
+  end:   "2026-09-30"   # last day of the quarter (inclusive)
+
 # ---- fellow-dump routine ----
 fellow_dump:
   output_dir: "fellow/{year}/{date}/"     # one markdown file per meeting

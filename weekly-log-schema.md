@@ -138,6 +138,57 @@ Final weekly draft for `#tech-leaders-updates`.
 <impediments, resourcing gaps, or escalation needs>
 ```
 
+### `## weekly_trend`
+Rolling 4-week snapshot: the current week plus up to 3 prior weekly logs,
+newest last. Current week row is bolded.
+
+```
+## weekly_trend
+> Rolling 4-week snapshot
+
+| Week    | Meetings | Decisions | AI Open | AI Closed | Tickets |
+|---------|----------|-----------|---------|-----------|---------|
+| W23     | 18       | 32        | 45      | 5         | 41      |
+| W24     | 21       | 38        | 52      | 8         | 48      |
+| W25     | 20       | 44        | 61      | 5         | 50      |
+| **W26** | **23**   | **47**    | **69**  | **6**     | **57**  |
+```
+
+### `## q3_progress`
+Cumulative Q3 tracker. Populated once `week_start >= quarter.start` in
+`config.yaml`. Each row is one weekly log; columns show both the weekly value
+and the running cumulative. The Mermaid chart overlays weekly bars with a
+cumulative line.
+
+```
+## q3_progress
+> Q3 2026 — Week 4 of 13
+
+| Week    | AI Closed | Tickets | Meetings | ∑ AI Closed | ∑ Tickets |
+|---------|-----------|---------|----------|-------------|-----------|
+| W28     | 8         | 45      | 18       | 8           | 45        |
+| W29     | 12        | 52      | 21       | 20          | 97        |
+| W30     | 5         | 48      | 19       | 25          | 145       |
+| **W31** | **9**     | **61**  | **22**   | **34**      | **206**   |
+
+```mermaid
+xychart-beta
+    title "Q3 2026 — Tickets touched"
+    x-axis ["W28", "W29", "W30", "W31"]
+    y-axis "Count" 0 --> 300
+    bar [45, 52, 48, 61]
+    line [45, 97, 145, 206]
+```
+```
+
+If the current week precedes `quarter.start`, render:
+```
+## q3_progress
+> Q3 2026 starts 2026-07-01
+
+_(not yet started)_
+```
+
 ## Empty-section convention
 
 ```

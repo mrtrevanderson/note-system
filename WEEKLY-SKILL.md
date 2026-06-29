@@ -122,18 +122,88 @@ complete Mon–Fri picture, not just the most recent day.
 - `daily_logs_read`: dates of successfully read daily logs.
 - `daily_logs_missing`: dates in the Mon–Fri window with no daily log found.
 
-## Step 6: render, write, commit
+## Step 6: read historical weekly logs for trend sections
+
+Read the following files from `weekly/{year}/` (and prior years if the quarter
+spans a year boundary). Parse only the YAML frontmatter of each file — do NOT
+re-read the full body.
+
+### weekly_trend
+Find up to 3 weekly log files with `week_start` < WEEK_START, sorted
+descending by date, take the 3 most recent. Extract from each:
+`week`, `counts.meetings`, `counts.decisions`, `counts.action_items_open`,
+`counts.action_items_closed`, `counts.tickets_touched`.
+Hold alongside the current week's counts. The table has 2–4 rows total.
+
+### q3_progress
+Read `quarter.start` and `quarter.end` from `config.yaml`.
+
+- If WEEK_START < `quarter.start`: set `q3_not_started = true`.
+- Otherwise: read ALL weekly logs with `week_start >= quarter.start` AND
+  `week_start <= WEEK_START`. Sort chronologically. Extract `week`,
+  `counts.action_items_closed`, `counts.tickets_touched`,
+  `counts.meetings` from each.
+  - Compute cumulative `∑ AI Closed` and `∑ Tickets` row by row.
+  - `WEEK_NUM` = count of rows (i.e. how many Q3 weeks so far).
+  - `TOTAL_WEEKS` = round((quarter.end − quarter.start).days / 7) = 13
+    for a standard quarter.
+  - `MAX_Y` for the Mermaid y-axis = the larger of:
+      - max weekly tickets_touched × 2
+      - cumulative tickets so far × (TOTAL_WEEKS / WEEK_NUM) × 1.2
+    rounded up to the nearest 50, minimum 100.
+
+## Step 7: render, write, commit
 
 1. Render per `weekly-log-schema.md` in the fixed section order:
    `tl;dr` → `meetings` → `decisions` → `action_items` → `ticket_activity` →
    `doc_activity` → `comms_highlights` → `lattice_update` → `geekbot_em_update`
-   → `geekbot_tl_update`.
+   → `geekbot_tl_update` → `weekly_trend` → `q3_progress`.
+
+   **`weekly_trend` format** — bold the current week row:
+   ```
+   ## weekly_trend
+   > Rolling 4-week snapshot
+
+   | Week    | Meetings | Decisions | AI Open | AI Closed | Tickets |
+   |---------|----------|-----------|---------|-----------|---------|
+   | W23     | 18       | 32        | 45      | 5         | 41      |
+   | **W26** | **23**   | **47**    | **69**  | **6**     | **57**  |
+   ```
+
+   **`q3_progress` format** — bold the current week row; include the chart:
+   ```
+   ## q3_progress
+   > Q3 2026 — Week 4 of 13
+
+   | Week    | AI Closed | Tickets | Meetings | ∑ AI Closed | ∑ Tickets |
+   |---------|-----------|---------|----------|-------------|-----------|
+   | W28     | 8         | 45      | 18       | 8           | 45        |
+   | **W31** | **9**     | **61**  | **22**   | **34**      | **206**   |
+
+   ```mermaid
+   xychart-beta
+       title "Q3 2026 — Tickets touched"
+       x-axis ["W28", "W29", "W30", "W31"]
+       y-axis "Count" 0 --> 300
+       bar [45, 52, 48, 61]
+       line [45, 97, 145, 206]
+   ```
+   ```
+
+   If `q3_not_started`:
+   ```
+   ## q3_progress
+   > Q3 2026 starts 2026-07-01
+
+   _(not yet started)_
+   ```
+
 2. Write `weekly/YEAR/WEEK_LABEL.md` (e.g. `weekly/2026/2026-W26.md`).
    Create the year subfolder if it does not exist.
 3. Commit directly to `branch.name` and push. No PR, no claude/ branch.
    Overwrite if the file already exists.
 
-## Step 7: report back
+## Step 8: report back
 
 Return the manifest: WEEK_LABEL, daily_logs_read, daily_logs_missing, counts,
 and any notes about deduplication or synthesis decisions made.
